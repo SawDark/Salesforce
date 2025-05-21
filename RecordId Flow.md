@@ -12,3 +12,5 @@ Dependiendo el Tipo de dato que seleccione al momento de su creación, puede rep
 
 ![image](https://github.com/user-attachments/assets/03198223-139e-45fa-8b83-83a6603d6d45)
 
+> [!TIP]
+> Recomiendo usar el Tipo de dato **Record**, ya que esto evita usar el **Elemento Get** para obtener los demás campos del Registro. 
