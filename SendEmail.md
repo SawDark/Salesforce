@@ -13,5 +13,5 @@ Para ello necesitamos seleccionar el elemento **action** y buscar la acción **S
 
 Para el apartado del **destinatario** se debe seleccionar una lista separada por comas, o una colección de direcciones de correo, aun cuando solo se vaya a enviar a una persona.  
 
-
+Para especificar el remitente se cuenta con tres opciones: El usuario que disparó la notificación, el Default Workflow user que esté configurado (), o un correo corporativo creado precisamente para este propósito. 
 
