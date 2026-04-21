@@ -10,8 +10,7 @@ Esta opción te permite crear tanto el **cuerpo** como el **asunto** del correo 
 
 Para ello necesitamos seleccionar el elemento **action** y buscar la acción **Send Email**. Una vez seleccionada, podemos comenzar a llenar toda la información correspondiente a la notificación, la cual incluye: Destinatario, CC, BCC, el Remitente, el Asunto, el Cuerpo, y otras opciones específicas que se detallan aquí.
 
-<img width="726" height="616" alt="image" src="https://github.com/user-attachments/assets/bc932e6f-b3f9-419c-8ad9-dda87a7c0914" />
-
+<img width="726" height="616" alt="image" src="https://github.com/user-attachments/assets/bc932e6f-b3f9-419c-8ad9-dda87a7c0914" /><br/>
 
 <img width="630" height="500" alt="image" src="https://github.com/user-attachments/assets/8ade2bb0-2823-4087-8304-db43309d3779" />
 
