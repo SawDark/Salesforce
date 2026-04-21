@@ -1,4 +1,3 @@
-<img width="944" height="362" alt="image" src="https://github.com/user-attachments/assets/d5724c6c-40ad-47c6-ad2c-966241aeadec" />
 # Formas de enviar notificaciones de correo en Salesforce
 
 ## Flows
