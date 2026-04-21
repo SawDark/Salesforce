@@ -26,4 +26,7 @@ El **asunto** y el **cuerpo** del correo se pueden configurar directamente desde
 
 <img width="758" height="701" alt="image" src="https://github.com/user-attachments/assets/16220a03-d0cc-4d4d-b44c-3d9abd8244d9" /><br/>
 
+Tambien es posible usar recursos para estos dos apartados. Una variable/constante de tipo Texto o una Formula, para el asunto, y un Text template para el cuerpo.
+
+<img width="1386" height="620" alt="image" src="https://github.com/user-attachments/assets/f775d3b4-c70b-44cf-89ed-d0b99b5c7399" />
 
