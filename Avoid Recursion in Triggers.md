@@ -46,3 +46,23 @@ trigger AccountTrigger on Account (after update) {
 }
 ```
 ### Variable estatica
+
+```apex
+
+public class TriggerControl {
+    public static Boolean alreadyRun = false;
+}
+```
+
+```apex
+
+trigger AccountTrigger on Account (after update) {
+    if (TriggerControl.alreadyRun) {
+        return;
+    }
+
+    TriggerControl.alreadyRun = true;
+
+    // trigger logic here
+}
+```
