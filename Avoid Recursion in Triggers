@@ -1,3 +1,0 @@
-#Avoid Recursion in Triggers
-
-Cuando estamos desarrollando un requerimiento que involucra Apex triggers, si no se 
