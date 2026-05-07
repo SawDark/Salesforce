@@ -29,4 +29,6 @@ Account trigger
                           → ...
 ```
 
+## Solucion
 
+La solucion consiste en usar variables estaticas, ya sea una bandera, o un Set que almacene el Id de los registros ya procesados. Si bien una variable estatica hace referencia a un atributo que pertenece a la clase en vez de a una instancia, la clave aqui es que las variables estaticas en Salesforce perduran durante toda una tranasaccion. 
