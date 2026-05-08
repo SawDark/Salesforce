@@ -107,8 +107,5 @@ trigger AccountTrigger on Account (after update) {
 ```
 
 > [!TIP]
-> A pesar de que esta es la base para comprender cómo controlar las recursiones en un Trigger Apex, hoy por hoy existen soluciones mucho más completas que involucran patrones de diseño y que recomiendo altamente usarlas. 
-
-[Apex Hours Differents Frameworks](https://www.apexhours.com/trigger-framework-in-salesforce/)
-[GitHub Trigger Framework](https://github.com/dschach/salesforce-trigger-framework)
+> A pesar de que esta es la base para comprender cómo controlar las recursiones en un Trigger Apex, hoy por hoy existen soluciones mucho más completas que involucran patrones de diseño y que recomiendo altamente usarlas. [Apex Hours Differents Frameworks](https://www.apexhours.com/trigger-framework-in-salesforce/), [GitHub Trigger Framework](https://github.com/dschach/salesforce-trigger-framework)
 
