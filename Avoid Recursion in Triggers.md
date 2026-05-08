@@ -71,3 +71,38 @@ Con la variable estática, la bandera mantendrá su valor durante toda la transa
 
 Adicionalmente, tampoco es posible crear una subclase dentro del Trigger y agregar la variable allí, por dos razones, la primera es porque se aconseja que el Trigger sea `logic-less`, lo que indica que debe tener el menor código posible,  y lo segundo, es porque no es viable crear variables de este tipo dentro de subclases, solo se pueden definir en clases principales.
 
+## Solución más completa.
+
+Aunque una bandera estática funciona bien, es importante tener presente que puede bloquear la ejecución de registros válidos cuando ocurre una transacción en lotes. 
+
+Salesforce menciona que una operación dml que contiene más de 200 registros, es dividida en `lotes/chunks`, de 200 registros cada uno. Esto quiere decir que si yo actualizo 400 registros en una misma operación a la base de datos, el Trigger se ejecuta 2 veces, uno por cada lote. 
+
+No obstante, el error está en creer que cada lote siempre representa una nueva ventana de ejecución que resetea los límites y las variables estáticas. Pero esto depende del lugar desde donde se hizo la operación. 
+
+<img width="1522" height="536" alt="image" src="https://github.com/user-attachments/assets/13c9b8af-d9bb-4095-aa3f-dc86f876673a" />
+
+Para abarcar los escenarios en donde los chunks ocurren en una misma transacción, lo mejor es usar un `Set estático` cuyo propósito es almacenar el Id de los registros que ya han sido procesados, dando luz verde a los que aún no se han manipulado. 
+
+```apex
+
+public class TriggerControl {
+    public static Set<Id> processedAccountIds = new Set<Id>();
+}
+```
+
+```apex
+
+trigger AccountTrigger on Account (after update) {
+   List<Account> accountsToProcess = new List<Account>();
+   
+    for (Account acc : Trigger.new) {
+        if (!TriggerControl.processedAccountIds.contains(acc.Id)) {
+            accountsToProcess.add(acc);
+            TriggerControl.processedAccountIds.add(acc.Id);
+        }
+    }
+
+    // lógica solo para cuentas no procesadas
+}
+```
+
