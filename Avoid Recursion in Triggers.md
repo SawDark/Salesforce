@@ -1,11 +1,10 @@
-# Evitar recursion en Tirggers
+# Evitar recursión en Triggers
 
-Cuando estamos desarrollando un requerimiento que involucra Apex triggers, y no se implementa adecuadamente la logica, es posible generar una recursion
-en la ejecucion del programa. 
+Cuando estamos desarrollando un requerimiento que involucra Apex triggers, y no se implementa adecuadamente la lógica, es posible generar una recursión en la ejecución del programa. 
 
-Esta recursion puede derivar en un limite llamado: `Maximum trigger depth exceeded`, el cual indica que dentro de una misma transaccion, se pueden ejecutar un maximo de 16 triggers en cadena. Es importante tener presente la palabra 'cadena', ya que es realmente lo que causa el error.
+Esta recursión puede derivar en un límite llamado: `Maximum trigger depth exceeded`, el cual indica que dentro de una misma transacción, se pueden ejecutar un máximo de 16 triggers en cadena. Es importante tener presente la palabra 'cadena', ya que es realmente lo que causa el error.
 
-##  Ejemplo de No Resurcion 
+##  Ejemplo de No Recursión
 
 ```apex
 
@@ -15,7 +14,7 @@ trigger AccountTrigger on Account (after update) {
     update opportunitiesToUpdate; // Opportunity trigger fires and finishes
 }
 ```
-## Ejemplo de Recursion
+## Ejemplo de Recursión
 
 ```apex
 
@@ -29,9 +28,9 @@ Account trigger
                           → ...
 ```
 
-## Solucion
+## Solución
 
-La solucion consiste en usar `variables estaticas`, ya sea una bandera, o un Set que almacene el Id de los registros ya procesados. Si bien una variable estatica hace referencia a un atributo que pertenece a la clase en vez de a una instancia, la clave aqui es que las variables estaticas en Salesforce perduran durante toda la transaccion, a diferencia de una variable normal, la cual se vuelve a crear en cada ejecuion del Trigger. 
+La solución consiste en usar `variables estáticas`, ya sea una bandera, o un Set que almacena el Id de los registros procesados. Si bien una variable estática hace referencia a un atributo que pertenece a la clase en vez de a una instancia, la clave aquí es que las variables estáticas en Salesforce perduran durante toda la transacción, a diferencia de una variable normal, la cual se vuelve a crear en cada ejecución del Trigger.
 
 ### Variable normal
 
@@ -45,6 +44,8 @@ trigger AccountTrigger on Account (after update) {
     }
 }
 ```
+En este ejemplo, la bandera siempre volverá a su valor original con cada ejecución del Trigger, por lo que no estaría cumpliendo la función que le corresponde. 
+
 ### Variable estatica
 
 ```apex
@@ -66,3 +67,7 @@ trigger AccountTrigger on Account (after update) {
     // trigger logic here
 }
 ```
+Con la variable estática, la bandera mantendrá su valor durante toda la transacción, lo cual es perfecto para controlar la ejecución en cadena. Sin embargo, hay que tener presente un par de cosas, recordemos que un Trigger es básicamente un bloque de código, prácticamente una ventana anónima, es decir, técnicamente no se considera una clase, por lo que no tiene sentido crear variables estáticas allí, no funcionan correctamente. 
+
+Adicionalmente, tampoco es posible crear una subclase dentro del Trigger y agregar la variable allí, por dos razones, la primera es porque se aconseja que el Trigger sea `logic-less`, lo que indica que debe tener el menor código posible,  y lo segundo, es porque no es viable crear variables de este tipo dentro de subclases, solo se pueden definir en clases principales.
+
