@@ -67,7 +67,7 @@ trigger AccountTrigger on Account (after update) {
     // trigger logic here
 }
 ```
-Con la variable estática, la bandera mantendrá su valor durante toda la transacción, lo cual es perfecto para controlar la ejecución en cadena. Sin embargo, hay que tener presente un par de cosas, recordemos que un Trigger es básicamente un bloque de código, prácticamente una ventana anónima, es decir, técnicamente no se considera una clase, por lo que no tiene sentido crear variables estáticas allí, no funcionan correctamente. 
+Con la variable estática, la bandera mantendrá su valor durante toda la transacción, lo cual es perfecto para controlar la ejecución en cadena. Sin embargo, hay que tener presente un par de cosas, recordemos que un Trigger es básicamente un bloque de código, prácticamente una ventana anónima, es decir, técnicamente no se considera una clase, por lo que no tiene sentido crear variables estáticas allí, no funcionan correctamente. Practicamente funcionan como una variable normal.  
 
 Adicionalmente, tampoco es posible crear una subclase dentro del Trigger y agregar la variable allí, por dos razones, la primera es porque se aconseja que el Trigger sea `logic-less`, lo que indica que debe tener el menor código posible,  y lo segundo, es porque no es viable crear variables de este tipo dentro de subclases, solo se pueden definir en clases principales.
 
