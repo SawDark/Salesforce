@@ -53,6 +53,9 @@ Se usa el elemento Create como si se fuera a crear un registo normal de cualquie
 
 <img width="1097" height="842" alt="image" src="https://github.com/user-attachments/assets/15fa0a18-afae-4513-9d24-c8401f673c1b" />
 
-### LWC
+### Sistema externo
+
+Se puede usar la API Rest o Soap. Sin embargo, Salesforce recomienda usar la [API Pub/Sub](https://developer.salesforce.com/docs/platform/pub-sub-api/overview)
+
 
 
