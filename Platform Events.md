@@ -41,10 +41,10 @@ Publicar un evento se puede realizar de distintas maneras dependiendo de donde s
 ```apex
 
 TestEvent__e eventMessage = new TestEvent__e(
-        Data__c = 'Se ha generado un Event Platform'
-	);
+	Data__c = 'Se ha generado un Event Platform'
+);
 
-	Database.SaveResult result = EventBus.publish(eventMessage);
+Database.SaveResult result = EventBus.publish(eventMessage);
 ```
 
 ### Flow
