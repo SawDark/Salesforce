@@ -57,5 +57,10 @@ Se usa el elemento Create como si se fuera a crear un registo normal de cualquie
 
 Se puede usar la API Rest o Soap. Sin embargo, Salesforce recomienda usar la [API Pub/Sub](https://developer.salesforce.com/docs/platform/pub-sub-api/overview)
 
+> [!IMPORTANT]
+> Cuando se está creando el Platform event en el paso 1, se puede especificar si la publicación del mensaje se hace de manera inmediata, o después de que la transacción haya sido exitosa.
+
+> [!NOTE]
+> No es posible acceder al eventbus a través de una consulta SOQL.
 
 
