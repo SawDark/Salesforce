@@ -26,6 +26,29 @@ La creación es similar a la de un Objeto custom, solo que los tipos de campo qu
 
 Aquí es importante aclarar que por defecto el Platform event ya cuenta con unos pocos campos estándar, dentro de los que se encuentran el `EventUuid` que no es más que el identificador único del mensaje que se publica, y el `ReplayId`, el cual representa la posición del mensaje dentro del eventbus, y que los suscriptores como Sistemas externos o un LWC pueden usar para ‘procesar’ eventos que por algún fallo no fueron escuchados en primera instancia.
 
+> [!NOTE]
+> El sufijo de los Platform Event es __e
 
+> [!NOTE]
+> El eventbus, que no es más que el canal de Salesforce donde se publican y se distribuyen los eventos, puede retener los mensajes hasta un máximo de 72 horas.
+
+## Publicar un evento
+
+Publicar un evento se puede realizar de distintas maneras dependiendo de donde se esté haciendo, aquí se adjuntan algunas de las opciones:
+
+### Apex
+
+```apex
+
+TestEvent__e eventMessage = new TestEvent__e(
+        Data__c = 'Se ha generado un Event Platform'
+	);
+
+	Database.SaveResult result = EventBus.publish(eventMessage);
+```
+
+### Flow
+
+### LWC
 
 
