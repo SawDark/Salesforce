@@ -146,6 +146,8 @@ export default class TestLWC extends LightningElement {
   }
 }
 ```
+> [!IMPORTANT]
+> lightning/empApi está pensado para Lightning Experience en escritorio y Salesforce indica que no está soportado en la app móvil de Salesforce.
 
 ### Sistema externo
 
