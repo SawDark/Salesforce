@@ -63,4 +63,91 @@ Se puede usar la API Rest o Soap. Sin embargo, Salesforce recomienda usar la [AP
 > [!NOTE]
 > No es posible acceder al eventbus a través de una consulta SOQL.
 
+## Suscribirse a un evento
+
+Para suscribirse a un Evento también depende del lugar donde se haga:
+
+### Apex
+
+Es necesario crear un Trigger Asociado a la plantilla del evento, esto se hace directamente desde la ventana donde inicialmente se creó. Cabe aclarar que este tipo de Triggers solo tienen permitido usarse en `After insert`. 
+
+<img width="2043" height="856" alt="image" src="https://github.com/user-attachments/assets/2b1076d0-e041-40fd-b7d8-eb14833c9214" />
+
+
+```apex
+
+trigger TestEventTrigger on TestEvent__e (after insert) {
+    for (TestEvent__e eventMessage : Trigger.new) {
+        System.debug('Datos: ' + eventMessage.Data__c);
+    }
+}
+```
+
+### Flow 
+
+Se debe crear un `Platform-Event-Triggered-Flow` y especificar el evento correspondiente. 
+
+<img width="532" height="549" alt="image" src="https://github.com/user-attachments/assets/65e0086c-0da5-4cb7-9e73-2f1454c85b73" />
+
+
+### LWC
+
+Se usa el Módulo `lightning/empApi` que proporciona diferentes métodos para suscribirse, desuscribirse, y administrar errores sobre un evento. 
+
+```apex
+
+import { LightningElement } from "lwc";
+import { subscribe, unsubscribe, onError } from "lightning/empApi";
+
+export default class TestLWC extends LightningElement {
+  channelName = "/event/TestEvent__e";
+  subscription = {};
+  replayId = -1;
+  accountId = null;
+  isSubscribing = false;
+
+  connectedCallback() {
+    this.subscribeToPlatformEvent();
+  }
+
+  disconnectedCallback() {
+    this.unsubscribeFromPlatformEvent();
+  }
+
+  subscribeToPlatformEvent() {
+    if (this.isSubscribing) {
+      return;
+    }
+
+    const messageCallback = (response) => {
+      console.info("Evento recibido: ", JSON.stringify(response));
+      const payload = response.data.payload;
+      this.accountId = payload.Data__c;
+    };
+
+    subscribe(this.channelName, this.replayId, messageCallback).then(
+      (response) => {
+        this.subscription = response;
+        this.isSubscribing = true;
+        console.log("Suscrito a: ", response.channel);
+      }
+    );
+  }
+
+  unsubscribeFromPlatformEvent() {
+    if (!this.subscription) {
+      return;
+    }
+
+    unsubscribe(this.subscription, (response) => {
+      console.info("Suscripción cancelada: ", JSON.stringify(response));
+      this.subscription = null;
+    });
+  }
+}
+```
+
+### Sistema externo
+
+Salesforce recomienda usar la [API Pub/Sub](https://developer.salesforce.com/docs/platform/pub-sub-api/overview)
 
